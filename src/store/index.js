@@ -35,7 +35,6 @@ export const Reducers = {
         const toOpen = newState.map.reduce((result, row) =>
             result + row.reduce((result, field) => result + (field.show ? 0 : 1), 0),
             0);
-        console.log(toOpen);
 
         if (toOpen === state.total) {
             newState.result = {

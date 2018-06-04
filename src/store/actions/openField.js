@@ -26,12 +26,20 @@ export function actionOpenField(x, y) {
         return;
     }
 
+    forFieldsBlock(map, x, y, (field, xi, yj) => {
+        if (!field.show) {
+            setTimeout(() => {
+                actionOpenField(xi, yj);
+            }, 100);
+        }
+    });
+}
+
+export function forFieldsBlock(map, x, y, func) {
     for (let i = -1; i < 2; i++) {
         for (let j = -1; j < 2; j++) {
-            if (map[x + i] && map[x + i][y + j] && !map[x + i][y + j].show) {
-                setTimeout(() => {
-                    actionOpenField(x + i, y + j);
-                }, 100);
+            if (map[x + i] && map[x + i][y + j]) {
+                func(map[x + i][y + j], x + i, y + j);
             }
         }
     }

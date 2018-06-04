@@ -41,7 +41,7 @@ class App extends Component {
     }
 
     onInputChanges({target}) {
-        this.inputs[target.name] = target.value;
+        this.inputs[target.name] = Math.abs(target.value);
     }
 }
 

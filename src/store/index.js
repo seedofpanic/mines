@@ -20,13 +20,6 @@ export const Reducers = {
             ...state.map
         ];
 
-        if (field.type === 'mine') {
-            newState.result = {
-                success: false,
-                message: 'You loose :('
-            };
-        }
-
         newState.map[payload.x][payload.y] = {
             ...field,
             show: true,
@@ -36,7 +29,12 @@ export const Reducers = {
             result + row.reduce((result, field) => result + (field.show ? 0 : 1), 0),
             0);
 
-        if (toOpen === state.total) {
+        if (field.type === 'mine') {
+            newState.result = {
+                success: false,
+                message: 'You loose :('
+            };
+        } else if (toOpen === state.total) {
             newState.result = {
                 success: true,
                 message: 'You won the game, yey!'

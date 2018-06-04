@@ -3,6 +3,11 @@ import {forFieldsBlock} from './openField';
 
 export function actionInitGame({width, height, mines}) {
     const newMap = [];
+
+    if (mines >= width * height) {
+        mines = width * height - 1;
+    }
+
     let minesToPlace = mines;
 
     for (let x = 0; x < height; x++) {

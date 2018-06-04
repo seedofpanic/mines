@@ -27,21 +27,22 @@ export const Reducers = {
             };
         }
 
-        const toOpen = newState.map.reduce((result, row) =>
-            result + row.reduce((result, field) => result + (field.show ? 1 : 0), 0),
-            0);
+        newState.map[payload.x][payload.y] = {
+            ...field,
+            show: true,
+        };
 
-        if (toOpen > state.total) {
+        const toOpen = newState.map.reduce((result, row) =>
+            result + row.reduce((result, field) => result + (field.show ? 0 : 1), 0),
+            0);
+        console.log(toOpen);
+
+        if (toOpen === state.total) {
             newState.result = {
                 success: true,
                 message: 'You won the game, yey!'
             }
         }
-
-        newState.map[payload.x][payload.y] = {
-            ...field,
-            show: true,
-        };
 
         return newState;
     },

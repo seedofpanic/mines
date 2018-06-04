@@ -20,6 +20,10 @@ export const Reducers = {
             ...state.map
         ];
 
+        newState.map[payload.x] = [
+            ...newState.map[payload.x]
+        ];
+
         newState.map[payload.x][payload.y] = {
             ...field,
             show: true,
@@ -47,6 +51,10 @@ export const Reducers = {
         const map = [
             ...state.map
         ];
+
+        map[payload.x] = {
+            ...map[payload.x]
+        };
 
         map[payload.x][payload.y] = {
             ...map[payload.x][payload.y],

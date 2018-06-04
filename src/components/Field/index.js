@@ -3,6 +3,10 @@ import './style.css';
 import {Actions} from '../../store/actions';
 
 export class Field extends Component {
+    shouldComponentUpdate(newState) {
+        return newState.field !== this.props.field;
+    }
+
     render() {
         const field = this.props.field;
 

@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import {Field} from '../Field';
 import './style.css';
+import {MapRow} from '../MapRow';
 
 export class Map extends Component {
     render() {
         const map = this.props.map;
 
         return <table className="Map"><tbody>{
-            map.map((row, index) => <tr className="row" key={index}>
-                {row.map((field, index) => <Field key={index} field={field}></Field>)}
-            </tr>)
+            map.map((row, index) => <MapRow key={index} row={row}></MapRow>)
         }</tbody></table>;
     }
 }

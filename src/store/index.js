@@ -52,9 +52,9 @@ export const Reducers = {
             ...state.map
         ];
 
-        map[payload.x] = {
+        map[payload.x] = [
             ...map[payload.x]
-        };
+        ];
 
         map[payload.x][payload.y] = {
             ...map[payload.x][payload.y],

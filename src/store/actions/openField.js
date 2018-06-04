@@ -1,7 +1,12 @@
 import {STORE} from '../index';
 
 export function actionOpenField(x, y) {
-    let map = STORE.getState().map;
+    const state = STORE.getState();
+    let map = state.map;
+
+    if (state.result) {
+        return;
+    }
 
     if (map[x][y].show) {
         return;

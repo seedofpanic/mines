@@ -16,9 +16,9 @@ export function actionMarkMine(x, y) {
         });
 
         if (countMarks === state.map[x][y].danger) {
-            forFieldsBlock(state.map, x, y, (field, xi, yj) => {
+            forFieldsBlock(state.map, x, y, field => {
                 if (!field.mark) {
-                    Actions.openField(xi, yj);
+                    Actions.openField(field.x, field.y);
                 }
             });
         }

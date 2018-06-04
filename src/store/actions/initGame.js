@@ -1,54 +1,31 @@
 import {STORE} from '../index';
+import {forFieldsBlock} from './openField';
 
-export function actionInitGame() {
+export function actionInitGame({width, height, mines}) {
     const newMap = [];
-    let minesToPlace = 10;
+    let minesToPlace = mines;
 
-    for (let x = 0; x < 10; x++) {
+    for (let x = 0; x < height; x++) {
         newMap[x] = [];
-        for (let y = 0; y < 10; y++) {
+        for (let y = 0; y < width; y++) {
             newMap[x][y] = {type: 'empty', show: false, danger: 0, x, y};
         }
     }
 
     while (minesToPlace > 0) {
-        const x = Math.floor(Math.random() * 9.99999);
-        const y = Math.floor(Math.random() * 9.99999);
+        const x = Math.floor(Math.random() * height - 0.000001);
+        const y = Math.floor(Math.random() * width - 0.000001);
 
         if (newMap[x][y].type === 'empty') {
             newMap[x][y].type = 'mine';
 
-            if (x > 0) {
-                newMap[x - 1][y].danger++;
-
-                if (y > 0) {
-                    newMap[x - 1][y - 1].danger++;
+            forFieldsBlock(newMap, x, y, field => {
+                if ((x === field.x) && (y === field.y)) {
+                    return;
                 }
 
-                if (y < 9) {
-                    newMap[x - 1][y + 1].danger++;
-                }
-            }
-
-            if (y > 0) {
-                newMap[x][y - 1].danger++;
-            }
-
-            if (x < 9) {
-                newMap[x + 1][y].danger++;
-
-                if (y < 9) {
-                    newMap[x + 1][y + 1].danger++;
-                }
-
-                if (y > 0) {
-                    newMap[x + 1][y - 1].danger++;
-                }
-            }
-
-            if (y < 9) {
-                newMap[x][y + 1].danger++;
-            }
+                field.danger++;
+            });
 
             minesToPlace--;
         }
@@ -58,6 +35,7 @@ export function actionInitGame() {
         type: 'initGame',
         payload: {
             newMap: newMap,
+            minesTotal: mines
         }
     });
 };

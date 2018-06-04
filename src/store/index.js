@@ -5,7 +5,7 @@ export const Reducers = {
         return {
             ...state,
             map: payload.newMap,
-            total: 10,
+            total: payload.minesTotal,
             marked: 0,
             result: undefined
         };

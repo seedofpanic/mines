@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "start:prod": "forever start serve -s build",
-    "stop:prod": "forever stop serve"
+    "start:prod": "forever start --uid mines ./node_modules/.bin/serve -s build",
+    "stop:prod": "forever stop mines"
   }
 }
